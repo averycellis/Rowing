@@ -2,6 +2,7 @@
 #Avery Ellis
 
 library(tidyverse)
+#setwd("~/Documents/GitHub/Rowing")
  
 
 clean_2K <- function(filename) {
@@ -30,9 +31,22 @@ clean_2K <- function(filename) {
 }
 
 
-prev_pr <- clean_c2_workout("11.30.2020.csv")
-current_pr <- clean_c2_workout("3.11.2021.csv")
-
-
-
+prev_pr <- clean_2K("11.30.2020.csv")
+current_pr <- clean_2K("3.11.2021.csv")
 #Plotting time!
+
+prev_pr_hr_plot <- prev_pr %>% 
+  ggplot(aes(x = Stroke.Number, y = Heart.Rate))+
+  geom_point(color = "#210ecc", alpha = 0.22)+
+  geom_line()+
+  #HR points and line of best fit
+  #geom_point(aes(x = Stroke.Number, y = Watts), 
+             #color = "#c40606", alpha = 0.222)+
+  theme(#legend.position = "right",
+        plot.title = element_text(hjust = 0.5),
+        plot.caption = element_text(hjust = 0.5, face = "italic"))+
+  labs(x = "Stroke Number", y = "", title = "Workout Analysis",
+       caption = "Plot Design by Avery Ellis
+       Data Exported via Concept2")
+prev_pr_hr_plot
+  
